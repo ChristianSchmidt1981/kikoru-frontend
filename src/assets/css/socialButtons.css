@@ -1,0 +1,43 @@
+
+ul.social-icons {
+  list-style: none;
+  padding: 0;
+  margin: 4px 10px 20px 0;
+  float: left;
+}
+
+ul.social-icons li {
+  display: inline-block;
+  margin-bottom: 0.25em;
+  padding: 0;
+  margin-right: 12px;
+}
+
+ul.social-icons li a {
+  background: #fff;
+  color: #141414;
+  border: 1px solid #fff;
+  display: block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+ul.social-icons .fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul.social-icons .fa-lg {
+  font-size: 1.33333333em;
+  line-height: .75em;
+  vertical-align: -15%;
+}

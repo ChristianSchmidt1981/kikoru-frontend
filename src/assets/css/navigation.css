@@ -1,0 +1,30 @@
+.sidebar-links .widget-title {
+    margin-bottom: 5px;
+}
+
+.widget-content {
+        margin-bottom: 27px;
+}
+
+.widget-content ul {
+        padding: 0;
+        margin-top: 0;
+        list-style: none;
+        padding-left: 0;
+}
+
+.sidebar-links {
+        float: left;
+    width: 15%;
+}
+
+.sidebar-links .widget-content>ul>li {
+        margin: 10px 0;
+}
+
+.sidebar-links .widget-content>ul>li>a {
+        font-weight: 700;
+        color: #000;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+}
