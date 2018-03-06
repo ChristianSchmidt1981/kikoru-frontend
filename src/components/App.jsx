@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Footer from '../container/Footer';
 import Header from '../container/Header';
 import Navigation from '../container/Navigation';
+import Filter from '../container/Filter';
 import ProductList from '../container/ProductList';
 import '../assets/css/main.css';
 
@@ -16,7 +17,10 @@ export default class App extends Component {
         <div>
           <Header />
           <div>
-            <Navigation />
+            <div className="left">
+              <Navigation />
+              <Filter />
+            </div>
             <ProductList />
           </div>
           <Footer />

@@ -10,3 +10,31 @@
 .collection-des {
   line-height: 20px;
 }
+
+li.product {
+  padding: 0;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+li.product .productImage {
+  width: 150px;
+}
+
+li.product .price-max {
+  text-decoration: line-through;
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+li.product .price-min {
+  font-size: 20px;
+  color: green;
+  font-weight: bold;
+}
+
+ul.product-list {
+  list-style-type: none;
+}

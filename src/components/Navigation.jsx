@@ -4,21 +4,12 @@ import '../assets/css/navigation.css';
 export default class Navigation extends Component {
   constructor(props) {
     super(props);
-    // this.onChange = this.onChange.bind(this);
-    this.a = 'a';
+    this.changeProductGroup = this.changeProductGroup.bind(this);
   }
 
-  getLinks() {
-    this.a = 'a';
-    return [
-      { link: '#', label: 'Bags & Accessories'},
-      { link: '#', label: 'Comos De Milano'},
-      { link: '#', label: 'Express Order Demo'},
-      { link: '#', label: 'Lorem Et Dorus'},
-      { link: '#', label: 'Lynn Cosmopolis'},
-      { link: '#', label: 'Men'},
-      { link: '#', label: 'Milancelos A Lanos'},
-    ];
+  changeProductGroup(event, id) {
+    event.preventDefault();
+    this.props.selectProductGroup(id);
   }
 
   render() {
@@ -30,11 +21,17 @@ export default class Navigation extends Component {
         <div className="widget-content">
           <ul>
             {
-              this.getLinks().map(link => (
+              this.props.productGroup.map((group) => {
+                const currentGroups = group.id === this.props.currentProductGroup ? 'current' : '';
+                return (
                 <li>
-                  <a href={link.link}>{link.label}</a>
+                  <a
+                    href={group.link}
+                    onClick={event => this.changeProductGroup(event, group.id)}
+                    className={currentGroups}
+                  >{group.name}</a>
                 </li>
-              ))
+              )})
             }
           </ul>
         </div>

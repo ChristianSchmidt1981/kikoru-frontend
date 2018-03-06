@@ -3,14 +3,15 @@ import { bindActionCreators } from 'redux';
 import { updateFile } from '../actions/index';
 import SocialButtons from '../components/SocialButtons.jsx';
 
-/*const mapStateToProps = state => ({
+const mapStateToProps = state => ({
+  socialLinks: state.socialLinks,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(
+/*const mapDispatchToProps = dispatch => bindActionCreators(
 );*/
 
 const VisibleSocialButtons = connect(
-  null, // mapStateToProps,
+  mapStateToProps,
   null, // mapDispatchToProps,
 )(SocialButtons);
 

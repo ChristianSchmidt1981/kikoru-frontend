@@ -13,18 +13,22 @@
         padding-left: 0;
 }
 
-.sidebar-links {
-        float: left;
+.left {
+    float: left;
     width: 15%;
 }
 
-.sidebar-links .widget-content>ul>li {
+.sidebar-links li {
         margin: 10px 0;
 }
 
-.sidebar-links .widget-content>ul>li>a {
+.sidebar-links a {
         font-weight: 700;
-        color: #000;
+        color: #999;
         letter-spacing: 0.05em;
         text-decoration: none;
+}
+
+.sidebar-links a.current {
+        color: #000;
 }
