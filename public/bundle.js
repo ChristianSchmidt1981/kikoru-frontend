@@ -21685,47 +21685,6 @@ var DefaultState = {
 
   productGroup: [],
   products: []
-  /* {
-    1: [
-      {
-        name: 'Tshirt',
-        size: ['XS', 'S'],
-        description: 'Cras in nunc non ipsum duo cursus ultrices est',
-        link: '/collections/men/products/cras-in-nunc-non-ipsum-duo-cursus-ultrices',
-        image: '//cdn.shopify.com/s/files/1/1825/4753/products/03_ce982bf6-365f-4ad6-8636-208b6b5416fa_large.jpg?v=1488852960',
-        price: {
-          min: '30.99 €',
-          max: '35.99 €',
-        },
-      },
-    ],
-    2: [
-      {
-        name: 'Jacket',
-        size: ['XS', 'S'],
-        description: 'Cras in nunc non ipsum duo cursus ultrices est',
-        link: '/collections/men/products/cras-in-nunc-non-ipsum-duo-cursus-ultrices',
-        image: '//cdn.shopify.com/s/files/1/1825/4753/products/03_ce982bf6-365f-4ad6-8636-208b6b5416fa_large.jpg?v=1488852960',
-        price: {
-          min: '50.99 €',
-          max: '55.99 €',
-        },
-      },
-    ],
-    3: [
-      {
-        name: 'Tshirt',
-        size: ['XS', 'S'],
-        description: 'Cras in nunc non ipsum duo cursus ultrices est',
-        link: '/collections/men/products/cras-in-nunc-non-ipsum-duo-cursus-ultrices',
-        image: '//cdn.shopify.com/s/files/1/1825/4753/products/03_ce982bf6-365f-4ad6-8636-208b6b5416fa_large.jpg?v=1488852960',
-        price: {
-          min: '100.99 €',
-          max: '150.99 €',
-        },
-      },
-    ],
-  }, */
 };
 
 function Reducer() {
@@ -23124,14 +23083,14 @@ var Navigation = function (_Component) {
     value: function changeProductGroup(event, id) {
       event.preventDefault();
       this.props.selectProductGroup(id);
-      this.loadProductsPerGroups();
+      this.loadProductsPerGroup();
     }
   }, {
     key: 'loadProductsPerGroup',
     value: function loadProductsPerGroup() {
       var _this2 = this;
 
-      fetch('/api/getPrices/?id=' + this.props.currentProductGroup).then(function (response) {
+      fetch('/api/getPrices?id=' + this.props.currentProductGroup).then(function (response) {
         return response.json();
       }).then(function (response) {
         return _this2.props.initProducts(response.value);
@@ -23144,7 +23103,7 @@ var Navigation = function (_Component) {
     value: function componentWillMount() {
       var _this3 = this;
 
-      this.loadProductsPerGroups();
+      this.loadProductsPerGroup();
       fetch('/api/groupList').then(function (response) {
         return response.json();
       }).then(function (response) {
@@ -23502,7 +23461,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    products: state.products[state.currentProductGroup]
+    products: state.products
     // filter based on product-size
     .filter(function (product) {
       var validSizes = product.size.filter(function (size) {

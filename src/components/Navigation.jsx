@@ -10,18 +10,18 @@ export default class Navigation extends Component {
   changeProductGroup(event, id) {
     event.preventDefault();
     this.props.selectProductGroup(id);
-    this.loadProductsPerGroup();
+    this.loadProductsPerGroup(id);
   }
 
-  loadProductsPerGroup() {
-    fetch(`/api/getPrices?id=${this.props.currentProductGroup}`)
+  loadProductsPerGroup(productId) {
+    fetch(`/api/getPrices?id=${productId}`)
       .then(response => response.json())
       .then(response => this.props.initProducts(response.value))
       .catch(response => console.log(response));
   }
 
   componentWillMount() {
-    this.loadProductsPerGroup();
+    this.loadProductsPerGroup(this.props.currentProductGroup);
     fetch('/api/groupList')
       .then(response => response.json())
       .then(response => this.props.initProductGroups(response.value))
