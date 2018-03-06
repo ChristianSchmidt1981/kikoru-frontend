@@ -23083,14 +23083,14 @@ var Navigation = function (_Component) {
     value: function changeProductGroup(event, id) {
       event.preventDefault();
       this.props.selectProductGroup(id);
-      this.loadProductsPerGroup();
+      this.loadProductsPerGroup(id);
     }
   }, {
     key: 'loadProductsPerGroup',
-    value: function loadProductsPerGroup() {
+    value: function loadProductsPerGroup(productId) {
       var _this2 = this;
 
-      fetch('/api/getPrices?id=' + this.props.currentProductGroup).then(function (response) {
+      fetch('/api/getPrices?id=' + productId).then(function (response) {
         return response.json();
       }).then(function (response) {
         return _this2.props.initProducts(response.value);
@@ -23103,7 +23103,7 @@ var Navigation = function (_Component) {
     value: function componentWillMount() {
       var _this3 = this;
 
-      this.loadProductsPerGroup();
+      this.loadProductsPerGroup(this.props.currentProductGroup);
       fetch('/api/groupList').then(function (response) {
         return response.json();
       }).then(function (response) {

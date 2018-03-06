@@ -1,4 +1,4 @@
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+// const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const path = require('path');
 
 module.exports = {
