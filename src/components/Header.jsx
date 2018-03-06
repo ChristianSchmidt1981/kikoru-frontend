@@ -6,7 +6,6 @@ import '../assets/css/header.css';
 export default class Header extends Component {
   constructor(props) {
     super(props);
-    // this.onChange = this.onChange.bind(this);
     this.a = 1;
   }
 

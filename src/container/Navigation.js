@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectProductGroup } from '../actions/index';
+import {
+  selectProductGroup,
+  initProductGroups,
+  initProducts,
+} from '../actions/index';
 import Navigation from '../components/Navigation.jsx';
 
 const mapStateToProps = state => ({
@@ -9,7 +13,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
-  { selectProductGroup },
+  {
+    selectProductGroup,
+    initProductGroups,
+    initProducts,
+  },
   dispatch,
 );
 

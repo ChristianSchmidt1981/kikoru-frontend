@@ -38,7 +38,7 @@ module.exports = {
     compress: true,
     port: 3000,
     proxy: {
-      '/api': 'http://localhost:3001',
+      '/api': 'http://localhost:1235',
     },
   },
 };

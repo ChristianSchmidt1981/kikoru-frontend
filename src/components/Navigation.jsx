@@ -10,6 +10,22 @@ export default class Navigation extends Component {
   changeProductGroup(event, id) {
     event.preventDefault();
     this.props.selectProductGroup(id);
+    this.loadProductsPerGroup();
+  }
+
+  loadProductsPerGroup() {
+    fetch(`/api/getPrices?id=${this.props.currentProductGroup}`)
+      .then(response => response.json())
+      .then(response => this.props.initProducts(response.value))
+      .catch(response => console.log(response));
+  }
+
+  componentWillMount() {
+    this.loadProductsPerGroup();
+    fetch('/api/groupList')
+      .then(response => response.json())
+      .then(response => this.props.initProductGroups(response.value))
+      .catch(response => console.log(response));
   }
 
   render() {
@@ -24,14 +40,16 @@ export default class Navigation extends Component {
               this.props.productGroup.map((group) => {
                 const currentGroups = group.id === this.props.currentProductGroup ? 'current' : '';
                 return (
-                <li>
-                  <a
-                    href={group.link}
-                    onClick={event => this.changeProductGroup(event, group.id)}
-                    className={currentGroups}
-                  >{group.name}</a>
-                </li>
-              )})
+                  <li>
+                    <a
+                      href={group.link}
+                      onClick={event => this.changeProductGroup(event, group.id)}
+                      className={currentGroups}
+                    >
+                      {group.name}
+                    </a>
+                  </li>
+                )})
             }
           </ul>
         </div>

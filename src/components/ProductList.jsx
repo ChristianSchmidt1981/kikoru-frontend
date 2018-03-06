@@ -9,6 +9,15 @@ export default class ProductList extends Component {
   }
 
   render() {
+
+    if (this.props.productGroup === undefined) {
+      return (
+        <div id="shopify-section-collection-header" className="shopify-section">
+          .
+        </div>
+      );
+    }
+    console.log( this.props.products);
     this.a = 'a';
     return (
       <div className="col-main">
