@@ -7,12 +7,11 @@
   "license": "MIT",
   "rootDir": "src",
   "engines": {
-    "node": ">8.9.4"
+    "node": ">=8.9.4"
   },
   "scripts": {
     "build": "webpack",
-    "hack": "webpack && webpack-dev-server --inline",
-    "start": "node ./server/bin/www",
+    "start": "webpack && webpack-dev-server --inline",
     "postinstall": "webpack"
   },
   "dependencies": {
