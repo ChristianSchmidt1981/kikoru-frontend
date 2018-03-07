@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const proxy = require('express-http-proxy');
-
+const proxy = require('http-proxy-middleware');
 const app = express();
 
 // view engine setup
@@ -15,7 +14,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //if (req.app.get('env') === 'development') {
-  app.use('/api', proxy('https://hidden-hollows-73699.herokuapp.com/api'));
+  app.use('/groupList', proxy({ target: 'https://hidden-hollows-73699.herokuapp.com/', changeOrigin: true }));
+  app.use('/getPrices', proxy({ target: 'https://hidden-hollows-73699.herokuapp.com/', changeOrigin: true }));
+  /*app.use('/api', proxy('http://hidden-hollows-73699.herokuapp.com/api', {
+    timeout: 2000, // in milliseconds, two seconds
+  }));*/
 //} else {
 //  app.use('/api', proxy('http://localhost:1235/api'));
 //}

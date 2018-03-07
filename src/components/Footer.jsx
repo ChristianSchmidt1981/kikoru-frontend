@@ -68,12 +68,11 @@ export default class Footer extends Component {
     <div className="footer-bottom">
           
             <address>
-              © 2017 ELLA Fashion Store Shopify. All Rights Reserved. Ecommerce Software by Shopify.<br /><a href="https://www.halothemes.com/template_category/shopify-templates/" title="Shopify Themes &amp; Templates">Shopify Themes &amp; Templates</a> by <a href="http://halothemes.com/" title="HaloThemes.com">HaloThemes.com</a>.
+              © 2018 kikoru UG. All Rights Reserved.
             </address>
     </div>
     
   </div>
-<a className="option-sidebar left" id="displayTextLeft" href="javascript:void(0)" title="Show Sidebar"><span>Show Sidebar</span></a>
 </footer>
     );
   }

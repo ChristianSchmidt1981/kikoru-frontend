@@ -16,11 +16,14 @@ a:hover, a:focus {
         display: block;
 }
 
+.logo {
+        height: 60px;
+}
 .header-logo {
-    display: inline-block;
-    max-height: 53px;
-    margin: 15px 0 22px;
-    margin-bottom: 50px;
+        display: inline-block;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 .header-logo:hover {
         filter: alpha(opacity=50);

@@ -7,18 +7,15 @@
 
 
 .nav-search input.input-group-field {
-        background: #fafafa;
         border-color: #e7e7e7;
         color: #000000;
         width: 100%;
-        line-height: 20px;
-        font-size: 20px;
-
-        border: 0;
-        border-bottom: 1px solid #e7e7e7;
+        line-height: 30px;
+        font-size: 30px;
+        border: 1px solid #e7e7e7;
         color: #323232;
         padding: 0 30px 0 12px;
-        height: 30px;
+        height: 40px;
         background: #fafafa;
 }
 

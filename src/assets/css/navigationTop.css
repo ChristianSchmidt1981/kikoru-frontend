@@ -1,0 +1,35 @@
+.navigation-top {
+        background: #000000;
+        clear: left;
+        width: 100%;
+        margin-bottom: 20px;
+}
+
+.navigation-top .site-nav{
+        width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    list-style: none;
+    padding-left: 10px;
+}
+
+.navigation-top .item {
+        position: relative;
+        display: inline-block;
+        list-style: none;
+}
+
+.navigation-top .link {
+        font-size: 20px;
+        line-height: 40px;
+        color: #fff;
+        text-decoration: none;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .navigation-top .link:hover,
+    .navigation-top .active {
+        text-decoration: underline;
+    }

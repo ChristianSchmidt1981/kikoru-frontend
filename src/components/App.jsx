@@ -4,6 +4,7 @@ import Header from '../container/Header';
 import Navigation from '../container/Navigation';
 import Filter from '../container/Filter';
 import ProductList from '../container/ProductList';
+import NavigationTop from '../container/NavigationTop';
 import '../assets/css/main.css';
 
 export default class App extends Component {
@@ -16,6 +17,8 @@ export default class App extends Component {
     return (
         <div>
           <Header />
+          <NavigationTop />
+
           <div>
             <div className="left">
               <Navigation />

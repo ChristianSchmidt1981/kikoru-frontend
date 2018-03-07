@@ -14,7 +14,7 @@ export default class Navigation extends Component {
   }
 
   loadProductsPerGroup(productId) {
-    fetch(`/api/getPrices?id=${productId}`)
+    fetch(`/getPrices?id=${productId}`)
       .then(response => response.json())
       .then(response => this.props.initProducts(response.value))
       .catch(response => console.log(response));
@@ -22,7 +22,7 @@ export default class Navigation extends Component {
 
   componentWillMount() {
     this.loadProductsPerGroup(this.props.currentProductGroup);
-    fetch('/api/groupList')
+    fetch('/groupList')
       .then(response => response.json())
       .then(response => this.props.initProductGroups(response.value))
       .catch(response => console.log(response));
@@ -31,9 +31,6 @@ export default class Navigation extends Component {
   render() {
     return (
       <div className="widget sidebar-links">
-        <div className="widget-title">
-          <h3>Categories</h3>
-        </div>
         <div className="widget-content">
           <ul>
             {

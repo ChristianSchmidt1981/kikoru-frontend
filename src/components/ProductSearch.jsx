@@ -31,7 +31,7 @@ export default class ProductSearch extends Component {
                     defaultValue=""
                     data-translate="general.search.placeholder"
                     translate-item="placeholder"
-                    placeholder="search"
+                    placeholder="Search Jacket or Jeans"
                     className="input-group-field"
                     aria-label="Search Site"
                     autoComplete="off"

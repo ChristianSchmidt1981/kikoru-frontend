@@ -326,48 +326,6 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
-
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
-}
-
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-var emptyFunction = function emptyFunction() {};
-
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
-
-module.exports = emptyFunction;
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports) {
 
 /*
@@ -449,7 +407,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -831,6 +789,48 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+
+function makeEmptyFunction(arg) {
+  return function () {
+    return arg;
+  };
+}
+
+/**
+ * This function accepts and discards inputs; it has no side effects. This is
+ * primarily useful idiomatically for overridable function endpoints which
+ * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+ */
+var emptyFunction = function emptyFunction() {};
+
+emptyFunction.thatReturns = makeEmptyFunction;
+emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+emptyFunction.thatReturnsThis = function () {
+  return this;
+};
+emptyFunction.thatReturnsArgument = function (arg) {
+  return arg;
+};
+
+module.exports = emptyFunction;
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1077,7 +1077,7 @@ module.exports = emptyObject;
 
 
 
-var emptyFunction = __webpack_require__(4);
+var emptyFunction = __webpack_require__(6);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -1372,7 +1372,7 @@ module.exports = ExecutionEnvironment;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(4);
+var emptyFunction = __webpack_require__(6);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -2497,7 +2497,7 @@ var store = (0, _redux.createStore)(_reducer2.default);
  * LICENSE file in the root directory of this source tree.
  */
 
-var m=__webpack_require__(8),n=__webpack_require__(10),p=__webpack_require__(4),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
+var m=__webpack_require__(8),n=__webpack_require__(10),p=__webpack_require__(6),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
 function y(a){for(var b=arguments.length-1,e="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(e+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var z={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function A(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}A.prototype.isReactComponent={};A.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?y("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};A.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function B(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}function C(){}C.prototype=A.prototype;var D=B.prototype=new C;D.constructor=B;m(D,A.prototype);D.isPureReactComponent=!0;function E(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}var F=E.prototype=new C;F.constructor=E;m(F,A.prototype);F.unstable_isAsyncReactComponent=!0;F.render=function(){return this.props.children};var G={current:null},H=Object.prototype.hasOwnProperty,I={key:!0,ref:!0,__self:!0,__source:!0};
@@ -2537,7 +2537,7 @@ var _assign = __webpack_require__(8);
 var emptyObject = __webpack_require__(10);
 var invariant = __webpack_require__(9);
 var warning = __webpack_require__(11);
-var emptyFunction = __webpack_require__(4);
+var emptyFunction = __webpack_require__(6);
 var checkPropTypes = __webpack_require__(12);
 
 // TODO: this is special because it gets imported during build.
@@ -3939,7 +3939,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(1),l=__webpack_require__(16),B=__webpack_require__(8),C=__webpack_require__(4),ba=__webpack_require__(17),da=__webpack_require__(18),ea=__webpack_require__(19),fa=__webpack_require__(20),ia=__webpack_require__(21),D=__webpack_require__(10);
+var aa=__webpack_require__(1),l=__webpack_require__(16),B=__webpack_require__(8),C=__webpack_require__(6),ba=__webpack_require__(17),da=__webpack_require__(18),ea=__webpack_require__(19),fa=__webpack_require__(20),ia=__webpack_require__(21),D=__webpack_require__(10);
 function E(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:E("227");
 var oa={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function pa(a,b){return(a&b)===b}
 var ta={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ta,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){ua.hasOwnProperty(f)?E("48",f):void 0;var g=f.toLowerCase(),h=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:pa(h,b.MUST_USE_PROPERTY),
@@ -4241,7 +4241,7 @@ var invariant = __webpack_require__(9);
 var warning = __webpack_require__(11);
 var ExecutionEnvironment = __webpack_require__(16);
 var _assign = __webpack_require__(8);
-var emptyFunction = __webpack_require__(4);
+var emptyFunction = __webpack_require__(6);
 var EventListener = __webpack_require__(17);
 var getActiveElement = __webpack_require__(18);
 var shallowEqual = __webpack_require__(19);
@@ -19872,7 +19872,7 @@ function createProvider() {
 
 
 
-var emptyFunction = __webpack_require__(4);
+var emptyFunction = __webpack_require__(6);
 var invariant = __webpack_require__(9);
 var warning = __webpack_require__(11);
 var assign = __webpack_require__(8);
@@ -20422,7 +20422,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var emptyFunction = __webpack_require__(4);
+var emptyFunction = __webpack_require__(6);
 var invariant = __webpack_require__(9);
 var ReactPropTypesSecret = __webpack_require__(13);
 
@@ -21817,7 +21817,11 @@ var _ProductList = __webpack_require__(99);
 
 var _ProductList2 = _interopRequireDefault(_ProductList);
 
-__webpack_require__(103);
+var _NavigationTop = __webpack_require__(103);
+
+var _NavigationTop2 = _interopRequireDefault(_NavigationTop);
+
+__webpack_require__(107);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21844,6 +21848,7 @@ var App = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(_NavigationTop2.default, null),
         _react2.default.createElement(
           'div',
           null,
@@ -22233,30 +22238,8 @@ var Footer = function (_Component) {
             _react2.default.createElement(
               'address',
               null,
-              '\xA9 2017 ELLA Fashion Store Shopify. All Rights Reserved. Ecommerce Software by Shopify.',
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(
-                'a',
-                { href: 'https://www.halothemes.com/template_category/shopify-templates/', title: 'Shopify Themes & Templates' },
-                'Shopify Themes & Templates'
-              ),
-              ' by ',
-              _react2.default.createElement(
-                'a',
-                { href: 'http://halothemes.com/', title: 'HaloThemes.com' },
-                'HaloThemes.com'
-              ),
-              '.'
+              '\xA9 2018 kikoru UG. All Rights Reserved.'
             )
-          )
-        ),
-        _react2.default.createElement(
-          'a',
-          { className: 'option-sidebar left', id: 'displayTextLeft', href: 'javascript:void(0)', title: 'Show Sidebar' },
-          _react2.default.createElement(
-            'span',
-            null,
-            'Show Sidebar'
           )
         )
       );
@@ -22387,7 +22370,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -22422,7 +22405,7 @@ if(false) {
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -22546,7 +22529,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -22581,12 +22564,12 @@ if(false) {
 /* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".footer {\n  background: #141414;\n    background-position: left top;\n    background-repeat: repeat;\n    background-attachment: scroll;\n    padding: 37px 0 110px;\n    letter-spacing: 0.02em;\n    clear: both;\n}\n\n.footer h3 {\n  color: #fff;\n  text-transform: uppercase;\n  font-size: 12px;\n  font-weight: 700;\n  letter-spacing: 0.05em;\n  margin-bottom: 16px;\n  color: #fff;\n}\n\n.footer ul {\n  padding: 0;\n  list-style: none;\n  margin-bottom: 20px;\n}\n\n.footer li li {\n  margin-bottom: 0.25em;\n}\n\n.footer a,\n.footer address {\n  color: #969696;\n  text-decoration: none;\n}\n\n.footer a:hover {\n  color: #fff;\n  text-decoration: underline;\n}\n\n.footer .container {\n  padding-right: 10px;\n  padding-left: 10px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.footer-top {\n  padding-bottom: 26px;\n}\n\n.footer .row {\n  margin-right: -10px;\n  margin-left: -10px;\n}\n\n.footer .col-1,\n.footer .col-2,\n.footer .col-3 {\n  float: left;\n  width: 20%;\n  padding: 0 10px;\n}\n\n.footer col-4 {\n  float: left;\n  width: 40%;\n  padding: 0 10px;\n}\n\n.footer-bottom {\n  border-color: #282828;\n  border-top: 1px solid #282828;\n  padding-top: 25px;\n  background: #141414;\n  background-position: left top;\n  background-repeat: repeat;\n  background-attachment: scroll;\n  clear: both;\n}\n\n.footer a, .footer-bottom address {\n  color: #969696;\n  margin-bottom: 18px;\n  line-height: 1.6;\n}", ""]);
+exports.push([module.i, ".footer {\n  background: #141414;\n    background-position: left top;\n    background-repeat: repeat;\n    background-attachment: scroll;\n    padding: 37px 0 50px;\n    letter-spacing: 0.02em;\n    clear: both;\n}\n\n.footer h3 {\n  color: #fff;\n  text-transform: uppercase;\n  font-size: 12px;\n  font-weight: 700;\n  letter-spacing: 0.05em;\n  margin-bottom: 16px;\n  color: #fff;\n}\n\n.footer ul {\n  padding: 0;\n  list-style: none;\n  margin-bottom: 20px;\n}\n\n.footer li li {\n  margin-bottom: 0.25em;\n}\n\n.footer a,\n.footer address {\n  color: #969696;\n  text-decoration: none;\n}\n\n.footer a:hover {\n  color: #fff;\n  text-decoration: underline;\n}\n\n.footer .container {\n  padding-right: 10px;\n  padding-left: 10px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.footer-top {\n  padding-bottom: 26px;\n}\n\n.footer .row {\n  margin-right: -10px;\n  margin-left: -10px;\n}\n\n.footer .col-1,\n.footer .col-2,\n.footer .col-3 {\n  float: left;\n  width: 20%;\n  padding: 0 10px;\n}\n\n.footer col-4 {\n  float: left;\n  width: 40%;\n  padding: 0 10px;\n}\n\n.footer-bottom {\n  border-color: #282828;\n  border-top: 1px solid #282828;\n  padding-top: 25px;\n  background: #141414;\n  background-position: left top;\n  background-repeat: repeat;\n  background-attachment: scroll;\n  clear: both;\n}\n\n.footer a, .footer-bottom address {\n  color: #969696;\n  margin-bottom: 18px;\n  line-height: 1.6;\n}", ""]);
 
 // exports
 
@@ -22725,7 +22708,7 @@ var Header = function (_Component) {
                 _react2.default.createElement(
                   'a',
                   { href: '/' },
-                  _react2.default.createElement('img', { className: 'header-logo', src: '//cdn.shopify.com/s/files/1/1825/4753/files/logo_2x_f84350e3-820e-4dcc-8e70-a109f051d378.png?v=1488879055', alt: 'Ella - Halothemes', itemprop: 'logo' })
+                  _react2.default.createElement('img', { className: 'logo', src: '//cdn.shopify.com/s/files/1/1825/4753/files/logo_2x_f84350e3-820e-4dcc-8e70-a109f051d378.png?v=1488879055', alt: 'Ella - Halothemes', itemprop: 'logo' })
                 )
               ),
               _react2.default.createElement(_ProductSearch2.default, null)
@@ -22846,7 +22829,7 @@ var ProductSearch = function (_Component) {
           defaultValue: '',
           'data-translate': 'general.search.placeholder',
           'translate-item': 'placeholder',
-          placeholder: 'search',
+          placeholder: 'Search Jacket or Jeans',
           className: 'input-group-field',
           'aria-label': 'Search Site',
           autoComplete: 'off'
@@ -22888,7 +22871,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -22923,12 +22906,12 @@ if(false) {
 /* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".nav-search {\n        float: right;\n        margin-left: 20px;\n        margin-top: 40px;\n        width: 80%;\n}\n\n\n.nav-search input.input-group-field {\n        background: #fafafa;\n        border-color: #e7e7e7;\n        color: #000000;\n        width: 100%;\n        line-height: 20px;\n        font-size: 20px;\n\n        border: 0;\n        border-bottom: 1px solid #e7e7e7;\n        color: #323232;\n        padding: 0 30px 0 12px;\n        height: 30px;\n        background: #fafafa;\n}\n\n\n.nav-search .input-group-btn {\n        position: absolute;\n        right: 0;\n        top: 0;\n}\n\n.nav-search .input-group-btn button.btn {\n        background: transparent;\n        width: 30px;\n        height: 30px;\n        display: block;\n        padding: 0;\n        position: absolute;\n        top: 0;\n        right: 0;\n        margin: 0;\n        border: 0;\n}\n", ""]);
+exports.push([module.i, ".nav-search {\n        float: right;\n        margin-left: 20px;\n        margin-top: 40px;\n        width: 80%;\n}\n\n\n.nav-search input.input-group-field {\n        border-color: #e7e7e7;\n        color: #000000;\n        width: 100%;\n        line-height: 30px;\n        font-size: 30px;\n        border: 1px solid #e7e7e7;\n        color: #323232;\n        padding: 0 30px 0 12px;\n        height: 40px;\n        background: #fafafa;\n}\n\n\n.nav-search .input-group-btn {\n        position: absolute;\n        right: 0;\n        top: 0;\n}\n\n.nav-search .input-group-btn button.btn {\n        background: transparent;\n        width: 30px;\n        height: 30px;\n        display: block;\n        padding: 0;\n        position: absolute;\n        top: 0;\n        right: 0;\n        margin: 0;\n        border: 0;\n}\n", ""]);
 
 // exports
 
@@ -22952,7 +22935,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -22987,12 +22970,12 @@ if(false) {
 /* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
 // module
-exports.push([module.i, "html,\nbody {\n        color: #2d2d2d;\n}\n\na, a:link, a:hover, a:active {\n        outline: none;\n}\n\na:hover, a:focus {\n   color: #000;\n   text-decoration: underline;\n}\n\n.site-header {\n        display: block;\n}\n\n.header-logo {\n    display: inline-block;\n    max-height: 53px;\n    margin: 15px 0 22px;\n    margin-bottom: 50px;\n}\n.header-logo:hover {\n        filter: alpha(opacity=50);\n}\n\n\n.site-header .header-bottom {\n        background-color: #fff;\n}\n\n.site-header .container {\n        padding-right: 10px;\n        padding-left: 10px;\n        margin-right: auto;\n        margin-left: auto;\n}\n\n.site-header .header-mobile {\n        display: none;\n    position: relative;\n    float: left;\n    background: #141414;\n}\n\n.site-header .header-panel-top {\n        float: left;\n        width: 100%;\n}\n\n\n.site-header .header-panel {\n        clear: both;\n}\n\n.header-bottom .nav-search {\n        float: right;\n        margin-left: 20px;\n}\n\n    @media (min-width: 768px)\n    .col-sm-4 {\n        width: 33.33333333%;\n    }\n\n@media (min-width: 768px)\n.nav-search.on .search-bar {\n    display: block!important;\n}\n\n.selectize-control div[data-value~=\"1\"] {background: url(//cdn.shopify.com/s/files/1/1825/4753/t/42/assets/i-lang-1.png?5422487708624053880) no-repeat;}        \n.selectize-control div[data-value~=\"2\"] {background: url(//cdn.shopify.com/s/files/1/1825/4753/t/42/assets/i-lang-2.png?5422487708624053880) no-repeat;}        ", ""]);
+exports.push([module.i, "html,\nbody {\n        color: #2d2d2d;\n}\n\na, a:link, a:hover, a:active {\n        outline: none;\n}\n\na:hover, a:focus {\n   color: #000;\n   text-decoration: underline;\n}\n\n.site-header {\n        display: block;\n}\n\n.logo {\n        height: 60px;\n}\n.header-logo {\n        display: inline-block;\n    margin-bottom: 20px;\n    margin-top: 20px;\n    margin-left: 20px;\n}\n.header-logo:hover {\n        filter: alpha(opacity=50);\n}\n\n\n.site-header .header-bottom {\n        background-color: #fff;\n}\n\n.site-header .container {\n        padding-right: 10px;\n        padding-left: 10px;\n        margin-right: auto;\n        margin-left: auto;\n}\n\n.site-header .header-mobile {\n        display: none;\n    position: relative;\n    float: left;\n    background: #141414;\n}\n\n.site-header .header-panel-top {\n        float: left;\n        width: 100%;\n}\n\n\n.site-header .header-panel {\n        clear: both;\n}\n\n.header-bottom .nav-search {\n        float: right;\n        margin-left: 20px;\n}\n\n    @media (min-width: 768px)\n    .col-sm-4 {\n        width: 33.33333333%;\n    }\n\n@media (min-width: 768px)\n.nav-search.on .search-bar {\n    display: block!important;\n}\n\n.selectize-control div[data-value~=\"1\"] {background: url(//cdn.shopify.com/s/files/1/1825/4753/t/42/assets/i-lang-1.png?5422487708624053880) no-repeat;}        \n.selectize-control div[data-value~=\"2\"] {background: url(//cdn.shopify.com/s/files/1/1825/4753/t/42/assets/i-lang-2.png?5422487708624053880) no-repeat;}        ", ""]);
 
 // exports
 
@@ -23090,7 +23073,7 @@ var Navigation = function (_Component) {
     value: function loadProductsPerGroup(productId) {
       var _this2 = this;
 
-      fetch('/api/getPrices?id=' + productId).then(function (response) {
+      fetch('/getPrices?id=' + productId).then(function (response) {
         return response.json();
       }).then(function (response) {
         return _this2.props.initProducts(response.value);
@@ -23104,7 +23087,7 @@ var Navigation = function (_Component) {
       var _this3 = this;
 
       this.loadProductsPerGroup(this.props.currentProductGroup);
-      fetch('/api/groupList').then(function (response) {
+      fetch('/groupList').then(function (response) {
         return response.json();
       }).then(function (response) {
         return _this3.props.initProductGroups(response.value);
@@ -23120,15 +23103,6 @@ var Navigation = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'widget sidebar-links' },
-        _react2.default.createElement(
-          'div',
-          { className: 'widget-title' },
-          _react2.default.createElement(
-            'h3',
-            null,
-            'Categories'
-          )
-        ),
         _react2.default.createElement(
           'div',
           { className: 'widget-content' },
@@ -23183,7 +23157,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -23218,12 +23192,12 @@ if(false) {
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".sidebar-links .widget-title {\n    margin-bottom: 5px;\n}\n\n.widget-content {\n        margin-bottom: 27px;\n}\n\n.widget-content ul {\n        padding: 0;\n        margin-top: 0;\n        list-style: none;\n        padding-left: 0;\n}\n\n.left {\n    float: left;\n    width: 15%;\n}\n\n.sidebar-links li {\n        margin: 10px 0;\n}\n\n.sidebar-links a {\n        font-weight: 700;\n        color: #999;\n        letter-spacing: 0.05em;\n        text-decoration: none;\n}\n\n.sidebar-links a.current {\n        color: #000;\n}", ""]);
+exports.push([module.i, ".sidebar-links .widget-title {\n    margin-bottom: 5px;\n}\n\n.widget-content {\n        margin-bottom: 27px;\n}\n\n.widget-content ul {\n        padding: 0;\n        margin-top: 0;\n        list-style: none;\n        padding-left: 0;\n}\n\n.left {\n    float: left;\n    width: 15%;\n    padding-left: 27px;\n}\n\n.sidebar-links li {\n        margin: 10px 0;\n}\n\n.sidebar-links a {\n        font-weight: 700;\n        color: #999;\n        letter-spacing: 0.05em;\n        text-decoration: none;\n}\n\n.sidebar-links a.current {\n        color: #000;\n}", ""]);
 
 // exports
 
@@ -23348,8 +23322,6 @@ var Filter = function (_Component) {
               if (_this2.props.currentFilter.size.includes(filterSize)) {
                 selected = { checked: 'checked' };
               }
-
-              console.log(filterSize, _this2.props.currentFilter.size, selected);
               return _react2.default.createElement(
                 'li',
                 { keys: idx, className: 'single-filter' },
@@ -23395,7 +23367,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -23430,7 +23402,7 @@ if(false) {
 /* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -23620,7 +23592,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -23655,7 +23627,7 @@ if(false) {
 /* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -23669,8 +23641,167 @@ exports.push([module.i, ".col-main {\n  float: right;\n  width: 80%;  \n}\n\n.pa
 /* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-var content = __webpack_require__(104);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(2);
+
+var _redux = __webpack_require__(3);
+
+var _NavigationTop = __webpack_require__(104);
+
+var _NavigationTop2 = _interopRequireDefault(_NavigationTop);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/*
+const mapStateToProps = state => ({
+  productGroup: state.productGroup,
+  currentProductGroup: state.currentProductGroup,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    selectProductGroup,
+    initProductGroups,
+    initProducts,
+  },
+  dispatch,
+);
+*/
+var VisibleNavigationTop = (0, _reactRedux.connect)(null, // mapStateToProps,
+null // mapDispatchToProps,
+)(_NavigationTop2.default);
+/*import {
+  selectProductGroup,
+  initProductGroups,
+  initProducts,
+} from '../actions/index';*/
+exports.default = VisibleNavigationTop;
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(105);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NavigationTop = function (_Component) {
+  _inherits(NavigationTop, _Component);
+
+  function NavigationTop(props) {
+    _classCallCheck(this, NavigationTop);
+
+    var _this = _possibleConstructorReturn(this, (NavigationTop.__proto__ || Object.getPrototypeOf(NavigationTop)).call(this, props));
+
+    _this.changeProductGroup = _this.changeProductGroup.bind(_this);
+    return _this;
+  }
+
+  _createClass(NavigationTop, [{
+    key: 'changeProductGroup',
+    value: function changeProductGroup(event, id) {
+      event.preventDefault();
+      this.props.selectProductGroup(id);
+      this.loadProductsPerGroup(id);
+    }
+  }, {
+    key: 'getLinks',
+    value: function getLinks() {
+      return [{ link: '#', label: 'Men' }, { link: '#', label: 'Women' }, { link: '#', label: 'Children' }, { link: '#', label: 'Baby' }];
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'navigation-top' },
+        _react2.default.createElement(
+          'nav',
+          { className: 'nav-bar', role: 'navigation' },
+          _react2.default.createElement(
+            'ul',
+            { className: 'site-nav' },
+            this.getLinks().map(function (link) {
+              return _react2.default.createElement(
+                'li',
+                { className: 'item' },
+                _react2.default.createElement(
+                  'a',
+                  { className: 'link active', href: link.label },
+                  link.label
+                )
+              );
+            })
+          )
+        )
+      );
+    }
+  }]);
+
+  return NavigationTop;
+}(_react.Component);
+/*
+<script>
+  var heightHeader = jQuery('.site-header').outerHeight();
+  var heightTop = jQuery('.site-header').outerHeight();
+
+  jQuery(window).scroll(function () {
+ 
+      var scrollTop = jQuery(this).scrollTop();
+      var w = window.innerWidth;
+      if (scrollTop > heightHeader) {
+        if (w > 767) {
+          jQuery('body').addClass('have-fixed');
+         jQuery('.header-bottom').addClass('on');
+          jQuery('.nav-search').removeClass('on');
+         jQuery('.main-content').css('padding-top',heightHeader);
+        }
+      }
+      else {
+        jQuery('.header-bottom').removeClass('on');
+         jQuery('.nav-search').addClass('on');
+        jQuery('body').removeClass('have-fixed');
+           jQuery('.main-content').css('padding-top',0);
+      }
+
+  });
+</script>
+*/
+
+
+exports.default = NavigationTop;
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(106);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -23684,7 +23815,71 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(5)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../../../node_modules/css-loader/index.js!./navigationTop.css", function() {
+		var newContent = require("!!../../../node_modules/css-loader/index.js!./navigationTop.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".navigation-top {\n        background: #000000;\n        clear: left;\n        width: 100%;\n        margin-bottom: 20px;\n}\n\n.navigation-top .site-nav{\n        width: 100%;\n    margin: 0;\n    padding: 0;\n    position: relative;\n    list-style: none;\n    padding-left: 10px;\n}\n\n.navigation-top .item {\n        position: relative;\n        display: inline-block;\n        list-style: none;\n}\n\n.navigation-top .link {\n        font-size: 20px;\n        line-height: 40px;\n        color: #fff;\n        text-decoration: none;\n        padding-left: 20px;\n        padding-right: 20px;\n    }\n\n    .navigation-top .link:hover,\n    .navigation-top .active {\n        text-decoration: underline;\n    }", ""]);
+
+// exports
+
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(108);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -23716,15 +23911,15 @@ if(false) {
 }
 
 /***/ }),
-/* 104 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "body {\n  margin: 0;\n}", ""]);
 
 // exports
 
