@@ -14,7 +14,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/api', proxy('http://localhost:1235/api'));
+if (req.app.get('env') === 'development') {
+  app.use('/api', proxy('https://hidden-hollows-73699.herokuapp.com/api'));
+} else {
+  app.use('/api', proxy('http://localhost:1235/api'));
+}
 app.use(express.static(path.join(__dirname, 'public')));
 
 

@@ -32,8 +32,6 @@ export default class Filter extends Component {
                 if (this.props.currentFilter.size.includes(filterSize)) {
                   selected = { checked: 'checked' };
                 } 
-
-                console.log(filterSize, this.props.currentFilter.size, selected);
                 return (
                   <li keys={idx} className="single-filter">
                     <input
