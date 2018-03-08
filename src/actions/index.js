@@ -14,6 +14,11 @@ const changeFilter = (filterGroup, filter) => ({
   filter,
 });
 
+const changeFilterPrice = price => ({
+  type: 'CHANGE_FILTER_PRICE',
+  price,
+});
+
 const searchProducts = searchString => ({
   type: 'SEARCH_PRODUCTS',
   searchString,
@@ -33,6 +38,7 @@ module.exports = {
   selectProductGroup,
   selectSubProductGroup,
   changeFilter,
+  changeFilterPrice,
   searchProducts,
   initProductGroups,
   initProducts,

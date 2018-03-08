@@ -11,6 +11,12 @@ const mapStateToProps = state => ({
       return Object.keys(validSizes) > 0 || state.currentFilter.size.length === 0;
     })
 
+    // filter: price-slider
+    .filter((product) => {
+      return state.currentFilter.price >= product.price.min ||
+        state.currentFilter.price === 0;
+    })
+
     // filter based on brand
     .filter((product) => {
       return state.currentFilter.brand.includes(product.brand) ||

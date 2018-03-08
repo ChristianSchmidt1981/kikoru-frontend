@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css';
 import '../assets/css/filter.css';
 
 export default class Filter extends Component {
   constructor(props) {
     super(props);
     this.changeFilter = this.changeFilter.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   changeProductGroup(event, id) {
@@ -33,18 +36,20 @@ export default class Filter extends Component {
                 const id = `brand${brandName}`;
                 let selected = {};
                 if (this.props.currentFilter.brand.includes(brandName)) {
-                  selected = { checked: 'checked' };
+                  selected = { defaultChecked: 'checked' };
                 }
                 return (
                   <li key={idx} className="single-filter">
-                    <input
-                      type="checkbox"
-                      id={id}
-                      value={brandName}
-                      {...selected}
-                      onClick={event => this.changeFilter(event, 'brand', brandName) }
-                    />
-                    {brandName}
+                    <label ref={id}>
+                      <input
+                        type="checkbox"
+                        id={id}
+                        value={brandName}
+                        {...selected}
+                        onChange={event => this.changeFilter(event, 'brand', brandName) }
+                      />
+                      {brandName}
+                    </label>
                   </li>
                 );
               })
@@ -68,7 +73,7 @@ export default class Filter extends Component {
                 const id = `size${filterSize}`;
                 let selected = {};
                 if (this.props.currentFilter.size.includes(filterSize)) {
-                  selected = { checked: 'checked' };
+                  selected = { defaultChecked: 'checked' };
                 } 
                 return (
                   <li key={idx} className="single-filter">
@@ -77,7 +82,83 @@ export default class Filter extends Component {
                       id={id}
                       value={filterSize}
                       {...selected}
-                      onClick={event => this.changeFilter(event, 'size', filterSize) }
+                      onChange={event => this.changeFilter(event, 'size', filterSize) }
+                    />
+                    {filterSize}
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
+  handleOnChange(value) {
+    this.props.changeFilterPrice(Math.round(value));
+  }
+
+  getFilterPriceSlider() {
+    let maxPrice = 0;
+    let minPrice = 0;
+    this.props.products.forEach((product) => {
+      if (product.price.min < minPrice || minPrice === 0) {
+        minPrice = product.price.min;
+        if (maxPrice === 0) {
+          maxPrice = product.price.max;
+        }
+      }
+      if (product.price.max > maxPrice || maxPrice === 0) {
+        maxPrice = product.price.max;
+      }
+    });
+    const step = 1;
+    const currentPrice = this.props.currentFilter.price === 0 ? maxPrice :
+      this.props.currentFilter.price;
+
+    return (
+      <div className="widget sidebar-links">
+        <div className="widget-title">
+          <h3>Price:</h3>
+        </div>
+        <div className="widget-content">
+          <Slider
+            min={minPrice}
+            max={maxPrice}
+            step={step}
+            value={currentPrice}
+            orientation="horizontal"
+            onChange={this.handleOnChange}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  getFilterSize() {
+    return (
+      <div className="widget sidebar-links">
+        <div className="widget-title">
+          <h3>Partner</h3>
+        </div>
+        <div className="widget-content">
+          <ul className="filter-size">
+            {
+              this.props.filter.size.map((filterSize, idx) => {
+                const id = `size${filterSize}`;
+                let selected = {};
+                if (this.props.currentFilter.size.includes(filterSize)) {
+                  selected = { defaultChecked: 'checked' };
+                } 
+                return (
+                  <li key={idx} className="single-filter">
+                    <input
+                      type="checkbox"
+                      id={id}
+                      value={filterSize}
+                      {...selected}
+                      onChange={event => this.changeFilter(event, 'size', filterSize) }
                     />
                     {filterSize}
                   </li>
@@ -94,10 +175,16 @@ export default class Filter extends Component {
     return (
       <div>
         {
+          this.getFilterPriceSlider()
+        }
+        {
           this.getFilterSize()
         }
         {
           this.getFilterBrand()
+        }
+        {
+          this.getFilterPartner()
         }
       </div>
     );

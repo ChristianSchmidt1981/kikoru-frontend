@@ -9,6 +9,8 @@ const DefaultState = {
   filter: {
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     brand: [],
+    price: 0,
+    partner: [],
   },
 
 
@@ -18,6 +20,8 @@ const DefaultState = {
   currentFilter: {
     size: [],
     brand: [],
+    price: 0,
+    partner: [],
   },
 
   productGroup: [],
@@ -55,6 +59,12 @@ function Reducer(state = DefaultState, action) {
     case 'INIT_PRODUCTS': {
       const newState = getCopyOfState(state);
       newState.products = action.products;
+      return newState;
+    }
+
+    case 'CHANGE_FILTER_PRICE': {
+      const newState = getCopyOfState(state);
+      newState.currentFilter.price = action.price;
       return newState;
     }
 

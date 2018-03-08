@@ -34,8 +34,8 @@ export default class ProductList extends Component {
 
         <ul className="product-list">
           {
-            this.props.products.map(product => (
-              <li className="product">
+            this.props.products.map((product, idx) => (
+              <li key={idx} className="product">
                 <a href={product.link} className="product-grid-image">
                   <img className="productImage" src={product.image} alt={product.description} />
                   <br />

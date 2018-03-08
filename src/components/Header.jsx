@@ -36,7 +36,7 @@ export default class Header extends Component {
             <div className="header-panel-top">
               <h1 className="header-logo col-xs-12 col-sm-4">
                 <a href="/">
-                  <img className="logo" src="//cdn.shopify.com/s/files/1/1825/4753/files/logo_2x_f84350e3-820e-4dcc-8e70-a109f051d378.png?v=1488879055" alt="Ella - Halothemes" itemProp="logo" />
+                  <img className="logo" src="logo.png" alt="kikoru" itemProp="logo" />
                 </a>
               </h1>
               <ProductSearch />

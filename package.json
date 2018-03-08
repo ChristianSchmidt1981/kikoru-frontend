@@ -36,6 +36,7 @@
     "react": "^16.2.0",
     "react-confirm-alert": "^1.0.8",
     "react-dom": "^16.2.0",
+    "react-rangeslider": "^2.2.0",
     "react-redux": "^5.0.7",
     "react-scripts": "^1.1.1",
     "react-transition-group": "^2.2.1",

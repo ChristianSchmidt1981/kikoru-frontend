@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeFilter } from '../actions/index';
+import { changeFilter, changeFilterPrice } from '../actions/index';
 import Filter from '../components/Filter.jsx';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
-  { changeFilter },
+  { changeFilter, changeFilterPrice },
   dispatch,
 );
 
