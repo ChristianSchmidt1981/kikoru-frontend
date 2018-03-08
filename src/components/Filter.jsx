@@ -33,7 +33,7 @@ export default class Filter extends Component {
                   selected = { checked: 'checked' };
                 } 
                 return (
-                  <li keys={idx} className="single-filter">
+                  <li key={idx} className="single-filter">
                     <input
                       type="checkbox"
                       id={id}

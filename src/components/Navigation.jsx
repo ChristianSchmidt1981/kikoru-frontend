@@ -9,7 +9,7 @@ export default class Navigation extends Component {
 
   changeProductGroup(event, id) {
     event.preventDefault();
-    this.props.selectProductGroup(id);
+    this.props.selectSubProductGroup(id);
     this.loadProductsPerGroup(id);
   }
 
@@ -20,24 +20,33 @@ export default class Navigation extends Component {
       .catch(response => console.log(response));
   }
 
-  componentWillMount() {
-    this.loadProductsPerGroup(this.props.currentProductGroup);
-    fetch('/groupList')
-      .then(response => response.json())
-      .then(response => this.props.initProductGroups(response.value))
-      .catch(response => console.log(response));
+  getProductGroup() {
+    for (let i = 0; i < this.props.productGroup.length; i += 1) {
+      if (this.props.productGroup[i].id === this.props.currentProductGroup) {
+        return this.props.productGroup[i];
+      }
+    }
+
+    return null;
   }
 
   render() {
+    const productGroup = this.getProductGroup();
+    let subGroups = [];
+
+    if (productGroup !== null) {
+      subGroups = productGroup.subGroups;
+    }
+
     return (
       <div className="widget sidebar-links">
         <div className="widget-content">
           <ul>
             {
-              this.props.productGroup.map((group) => {
-                const currentGroups = group.id === this.props.currentProductGroup ? 'current' : '';
+              subGroups.map((group, idx) => {
+                const currentGroups = group.id === this.props.currentSubProductGroup ? 'current' : '';
                 return (
-                  <li>
+                  <li key={idx}>
                     <a
                       href={group.link}
                       onClick={event => this.changeProductGroup(event, group.id)}

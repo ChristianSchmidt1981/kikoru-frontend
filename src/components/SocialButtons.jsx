@@ -7,10 +7,10 @@ export default class SocialButtons extends Component {
     return (
       <ul className="social-icons">
       {
-        this.props.socialLinks.map(link => {
+        this.props.socialLinks.map((link, idx) => {
           const className = `fa fa-${link.name} fa-lg`;
           return (
-          <li className={link.name}>
+          <li key={idx} className={link.name}>
           <a href={link.href} title={link.name}>
             <i className={className} aria-hidden="true"></i>
           </a>

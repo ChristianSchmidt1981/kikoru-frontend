@@ -12,6 +12,7 @@ const DefaultState = {
 
 
   currentSearchString: '',
+  currentSubProductGroup: 0,
   currentProductGroup: 1,
   currentFilter: {
     size: [],
@@ -27,6 +28,13 @@ function Reducer(state = DefaultState, action) {
     case 'SELECT_PRODUCT_GROUP': {
       const newState = getCopyOfState(state);
       newState.currentProductGroup = action.productGroupId;
+      newState.currentSubProductGroup = 0;
+      return newState;
+    }
+
+    case 'SELECT_SUB_PRODUCT_GROUP': {
+      const newState = getCopyOfState(state);
+      newState.currentSubProductGroup = action.productGroupId;
       return newState;
     }
 

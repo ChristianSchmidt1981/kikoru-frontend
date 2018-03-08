@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-/*import {
+import {
   selectProductGroup,
   initProductGroups,
   initProducts,
-} from '../actions/index';*/
+} from '../actions/index';
 import NavigationTop from '../components/NavigationTop.jsx';
 
-/*
+
 const mapStateToProps = state => ({
   productGroup: state.productGroup,
   currentProductGroup: state.currentProductGroup,
@@ -21,10 +21,10 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   },
   dispatch,
 );
-*/
+
 const VisibleNavigationTop = connect(
-  null, // mapStateToProps,
-  null, // mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(NavigationTop);
 
 export default VisibleNavigationTop;

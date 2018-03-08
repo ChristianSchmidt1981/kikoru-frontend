@@ -13,13 +13,19 @@ export default class NavigationTop extends Component {
     this.loadProductsPerGroup(id);
   }
 
-  getLinks() {
-    return [
-      {link:'#', label:'Men'},
-      {link:'#', label:'Women'},
-      {link:'#', label:'Children'},
-      {link:'#', label:'Baby'},
-    ];
+  loadProductsPerGroup(productId) {
+    fetch(`/getPrices?id=${productId}`)
+      .then(response => response.json())
+      .then(response => this.props.initProducts(response.value))
+      .catch(response => console.log(response));
+  }
+
+  componentWillMount() {
+    this.loadProductsPerGroup(this.props.currentProductGroup);
+    fetch('/groupList')
+      .then(response => response.json())
+      .then(response => this.props.initProductGroups(response.value))
+      .catch(response => console.log(response));
   }
 
   render() {
@@ -28,11 +34,18 @@ export default class NavigationTop extends Component {
         <nav className="nav-bar" role="navigation">
           <ul className="site-nav">
             {
-              this.getLinks().map(link => (
-                <li className="item">
-                  <a className="link active" href={link.label}>{link.label}</a> 	
-                </li>
-              ))
+              this.props.productGroup.map((group) => {
+                const currentGroups = group.id === this.props.currentProductGroup ? 'link active' : 'link';
+                return (<li className="item">
+                  <a
+                    href={group.link}
+                    className={currentGroups}
+                    onClick={event => this.changeProductGroup(event, group.id)}
+                  >
+                    {group.name}
+                  </a>
+                </li>);
+              })
             }
           </ul>
         </nav>

@@ -844,6 +844,13 @@ var selectProductGroup = function selectProductGroup(productGroupId) {
   };
 };
 
+var selectSubProductGroup = function selectSubProductGroup(productGroupId) {
+  return {
+    type: 'SELECT_SUB_PRODUCT_GROUP',
+    productGroupId: productGroupId
+  };
+};
+
 var changeFilter = function changeFilter(filterGroup, filter) {
   return {
     type: 'CHANGE_FILTER',
@@ -875,6 +882,7 @@ var initProducts = function initProducts(products) {
 
 module.exports = {
   selectProductGroup: selectProductGroup,
+  selectSubProductGroup: selectSubProductGroup,
   changeFilter: changeFilter,
   searchProducts: searchProducts,
   initProductGroups: initProductGroups,
@@ -21678,6 +21686,7 @@ var DefaultState = {
   },
 
   currentSearchString: '',
+  currentSubProductGroup: 0,
   currentProductGroup: 1,
   currentFilter: {
     size: []
@@ -21699,43 +21708,51 @@ function Reducer() {
       {
         var newState = getCopyOfState(state);
         newState.currentProductGroup = action.productGroupId;
+        newState.currentSubProductGroup = 0;
         return newState;
+      }
+
+    case 'SELECT_SUB_PRODUCT_GROUP':
+      {
+        var _newState = getCopyOfState(state);
+        _newState.currentSubProductGroup = action.productGroupId;
+        return _newState;
       }
 
     case 'SEARCH_PRODUCTS':
       {
-        var _newState = getCopyOfState(state);
-        _newState.currentSearchString = action.searchString;
-        return _newState;
+        var _newState2 = getCopyOfState(state);
+        _newState2.currentSearchString = action.searchString;
+        return _newState2;
       }
 
     case 'INIT_PRODUCT_GROUPS':
       {
-        var _newState2 = getCopyOfState(state);
-        _newState2.productGroup = action.productGroupList;
-        return _newState2;
+        var _newState3 = getCopyOfState(state);
+        _newState3.productGroup = action.productGroupList;
+        return _newState3;
       }
 
     case 'INIT_PRODUCTS':
       {
-        var _newState3 = getCopyOfState(state);
-        _newState3.products = action.products;
-        return _newState3;
+        var _newState4 = getCopyOfState(state);
+        _newState4.products = action.products;
+        return _newState4;
       }
 
     case 'CHANGE_FILTER':
       {
-        var _newState4 = getCopyOfState(state);
-        if (!_newState4.currentFilter[action.filterGroup].includes(action.filter)) {
-          _newState4.currentFilter[action.filterGroup] = getCopyOfState(_newState4.currentFilter[action.filterGroup]);
-          _newState4.currentFilter[action.filterGroup].push(action.filter);
+        var _newState5 = getCopyOfState(state);
+        if (!_newState5.currentFilter[action.filterGroup].includes(action.filter)) {
+          _newState5.currentFilter[action.filterGroup] = getCopyOfState(_newState5.currentFilter[action.filterGroup]);
+          _newState5.currentFilter[action.filterGroup].push(action.filter);
         } else {
-          _newState4.currentFilter[action.filterGroup] = _newState4.currentFilter[action.filterGroup].filter(function (filter) {
+          _newState5.currentFilter[action.filterGroup] = _newState5.currentFilter[action.filterGroup].filter(function (filter) {
             return filter !== action.filter;
           });
         }
 
-        return _newState4;
+        return _newState5;
       }
 
     default:
@@ -22330,11 +22347,11 @@ var SocialButtons = function (_Component) {
       return _react2.default.createElement(
         'ul',
         { className: 'social-icons' },
-        this.props.socialLinks.map(function (link) {
+        this.props.socialLinks.map(function (link, idx) {
           var className = 'fa fa-' + link.name + ' fa-lg';
           return _react2.default.createElement(
             'li',
-            { className: link.name },
+            { key: idx, className: link.name },
             _react2.default.createElement(
               'a',
               { href: link.href, title: link.name },
@@ -22708,7 +22725,7 @@ var Header = function (_Component) {
                 _react2.default.createElement(
                   'a',
                   { href: '/' },
-                  _react2.default.createElement('img', { className: 'logo', src: '//cdn.shopify.com/s/files/1/1825/4753/files/logo_2x_f84350e3-820e-4dcc-8e70-a109f051d378.png?v=1488879055', alt: 'Ella - Halothemes', itemprop: 'logo' })
+                  _react2.default.createElement('img', { className: 'logo', src: '//cdn.shopify.com/s/files/1/1825/4753/files/logo_2x_f84350e3-820e-4dcc-8e70-a109f051d378.png?v=1488879055', alt: 'Ella - Halothemes', itemProp: 'logo' })
                 )
               ),
               _react2.default.createElement(_ProductSearch2.default, null)
@@ -23006,13 +23023,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state) {
   return {
     productGroup: state.productGroup,
-    currentProductGroup: state.currentProductGroup
+    currentProductGroup: state.currentProductGroup,
+    currentSubProductGroup: state.currentSubProductGroup
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return (0, _redux.bindActionCreators)({
     selectProductGroup: _index.selectProductGroup,
+    selectSubProductGroup: _index.selectSubProductGroup,
     initProductGroups: _index.initProductGroups,
     initProducts: _index.initProducts
   }, dispatch);
@@ -23065,7 +23084,7 @@ var Navigation = function (_Component) {
     key: 'changeProductGroup',
     value: function changeProductGroup(event, id) {
       event.preventDefault();
-      this.props.selectProductGroup(id);
+      this.props.selectSubProductGroup(id);
       this.loadProductsPerGroup(id);
     }
   }, {
@@ -23082,23 +23101,27 @@ var Navigation = function (_Component) {
       });
     }
   }, {
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var _this3 = this;
+    key: 'getProductGroup',
+    value: function getProductGroup() {
+      for (var i = 0; i < this.props.productGroup.length; i += 1) {
+        if (this.props.productGroup[i].id === this.props.currentProductGroup) {
+          return this.props.productGroup[i];
+        }
+      }
 
-      this.loadProductsPerGroup(this.props.currentProductGroup);
-      fetch('/groupList').then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        return _this3.props.initProductGroups(response.value);
-      }).catch(function (response) {
-        return console.log(response);
-      });
+      return null;
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
+
+      var productGroup = this.getProductGroup();
+      var subGroups = [];
+
+      if (productGroup !== null) {
+        subGroups = productGroup.subGroups;
+      }
 
       return _react2.default.createElement(
         'div',
@@ -23109,17 +23132,17 @@ var Navigation = function (_Component) {
           _react2.default.createElement(
             'ul',
             null,
-            this.props.productGroup.map(function (group) {
-              var currentGroups = group.id === _this4.props.currentProductGroup ? 'current' : '';
+            subGroups.map(function (group, idx) {
+              var currentGroups = group.id === _this3.props.currentSubProductGroup ? 'current' : '';
               return _react2.default.createElement(
                 'li',
-                null,
+                { key: idx },
                 _react2.default.createElement(
                   'a',
                   {
                     href: group.link,
                     onClick: function onClick(event) {
-                      return _this4.changeProductGroup(event, group.id);
+                      return _this3.changeProductGroup(event, group.id);
                     },
                     className: currentGroups
                   },
@@ -23324,7 +23347,7 @@ var Filter = function (_Component) {
               }
               return _react2.default.createElement(
                 'li',
-                { keys: idx, className: 'single-filter' },
+                { key: idx, className: 'single-filter' },
                 _react2.default.createElement('input', _extends({
                   type: 'checkbox',
                   id: id,
@@ -23632,7 +23655,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, ".col-main {\n  float: right;\n  width: 80%;  \n}\n\n.page-header h2 {\n  margin-bottom: 19px;\n}\n\n.collection-des {\n  line-height: 20px;\n}\n\nli.product {\n  padding: 0;\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n\nli.product .productImage {\n  width: 150px;\n}\n\nli.product .price-max {\n  text-decoration: line-through;\n  color: #ff0000;\n  font-weight: bold;\n  font-size: 20px;\n}\n\nli.product .price-min {\n  font-size: 20px;\n  color: green;\n  font-weight: bold;\n}\n\nul.product-list {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, ".col-main {\n  float: right;\n  width: 80%;  \n}\n\n.page-header h2 {\n  margin-bottom: 19px;\n}\n\n.collection-des {\n  line-height: 20px;\n}\n\nli.product {\n  padding: 0;\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n\nli.product .productImage {\n  width: 150px;\n  opacity: 0.3;\n}\n\nli.product:hover .productImage {\n  opacity: 1;\n}\n\nli.product .price-max {\n  text-decoration: line-through;\n  color: #ff0000;\n  font-weight: bold;\n  font-size: 20px;\n}\n\nli.product .price-min {\n  font-size: 20px;\n  color: green;\n  font-weight: bold;\n}\n\nul.product-list {\n  list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -23652,35 +23675,31 @@ var _reactRedux = __webpack_require__(2);
 
 var _redux = __webpack_require__(3);
 
+var _index = __webpack_require__(7);
+
 var _NavigationTop = __webpack_require__(104);
 
 var _NavigationTop2 = _interopRequireDefault(_NavigationTop);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-const mapStateToProps = state => ({
-  productGroup: state.productGroup,
-  currentProductGroup: state.currentProductGroup,
-});
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    productGroup: state.productGroup,
+    currentProductGroup: state.currentProductGroup
+  };
+};
 
-const mapDispatchToProps = dispatch => bindActionCreators(
-  {
-    selectProductGroup,
-    initProductGroups,
-    initProducts,
-  },
-  dispatch,
-);
-*/
-var VisibleNavigationTop = (0, _reactRedux.connect)(null, // mapStateToProps,
-null // mapDispatchToProps,
-)(_NavigationTop2.default);
-/*import {
-  selectProductGroup,
-  initProductGroups,
-  initProducts,
-} from '../actions/index';*/
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return (0, _redux.bindActionCreators)({
+    selectProductGroup: _index.selectProductGroup,
+    initProductGroups: _index.initProductGroups,
+    initProducts: _index.initProducts
+  }, dispatch);
+};
+
+var VisibleNavigationTop = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_NavigationTop2.default);
+
 exports.default = VisibleNavigationTop;
 
 /***/ }),
@@ -23730,13 +23749,37 @@ var NavigationTop = function (_Component) {
       this.loadProductsPerGroup(id);
     }
   }, {
-    key: 'getLinks',
-    value: function getLinks() {
-      return [{ link: '#', label: 'Men' }, { link: '#', label: 'Women' }, { link: '#', label: 'Children' }, { link: '#', label: 'Baby' }];
+    key: 'loadProductsPerGroup',
+    value: function loadProductsPerGroup(productId) {
+      var _this2 = this;
+
+      fetch('/getPrices?id=' + productId).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        return _this2.props.initProducts(response.value);
+      }).catch(function (response) {
+        return console.log(response);
+      });
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this3 = this;
+
+      this.loadProductsPerGroup(this.props.currentProductGroup);
+      fetch('/groupList').then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        return _this3.props.initProductGroups(response.value);
+      }).catch(function (response) {
+        return console.log(response);
+      });
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
+
       return _react2.default.createElement(
         'div',
         { className: 'navigation-top' },
@@ -23746,14 +23789,21 @@ var NavigationTop = function (_Component) {
           _react2.default.createElement(
             'ul',
             { className: 'site-nav' },
-            this.getLinks().map(function (link) {
+            this.props.productGroup.map(function (group) {
+              var currentGroups = group.id === _this4.props.currentProductGroup ? 'link active' : 'link';
               return _react2.default.createElement(
                 'li',
                 { className: 'item' },
                 _react2.default.createElement(
                   'a',
-                  { className: 'link active', href: link.label },
-                  link.label
+                  {
+                    href: group.link,
+                    className: currentGroups,
+                    onClick: function onClick(event) {
+                      return _this4.changeProductGroup(event, group.id);
+                    }
+                  },
+                  group.name
                 )
               );
             })

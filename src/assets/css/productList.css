@@ -20,6 +20,11 @@ li.product {
 
 li.product .productImage {
   width: 150px;
+  opacity: 0.3;
+}
+
+li.product:hover .productImage {
+  opacity: 1;
 }
 
 li.product .price-max {

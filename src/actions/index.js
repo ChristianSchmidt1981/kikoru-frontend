@@ -3,6 +3,11 @@ const selectProductGroup = productGroupId => ({
   productGroupId,
 });
 
+const selectSubProductGroup = productGroupId => ({
+  type: 'SELECT_SUB_PRODUCT_GROUP',
+  productGroupId,
+});
+
 const changeFilter = (filterGroup, filter) => ({
   type: 'CHANGE_FILTER',
   filterGroup,
@@ -26,6 +31,7 @@ const initProducts = products => ({
 
 module.exports = {
   selectProductGroup,
+  selectSubProductGroup,
   changeFilter,
   searchProducts,
   initProductGroups,
