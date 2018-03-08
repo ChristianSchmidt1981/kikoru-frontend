@@ -136,7 +136,7 @@ export default class Filter extends Component {
     );
   }
 
-  getFilterSize() {
+  getFilterPartner() {
     return (
       <div className="widget sidebar-links">
         <div className="widget-title">
