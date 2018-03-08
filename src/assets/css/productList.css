@@ -14,17 +14,29 @@
 li.product {
   padding: 0;
   float: left;
-  margin-right: 20px;
+  width: 30%;
   margin-bottom: 20px;
+  border: 1px solid #F6F6F6;
 }
 
 li.product .productImage {
-  width: 150px;
-  opacity: 0.3;
+  width: 200px;
+  opacity: 0.8;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+li.product .product-name {
+  font-weight: normal;
+  color: #999;
 }
 
 li.product:hover .productImage {
   opacity: 1;
+
+}
+li.product:hover {
+  box-shadow: 0 10px 40px rgba(0,0,0,.1);
 }
 
 li.product .price-max {
@@ -35,9 +47,25 @@ li.product .price-max {
 }
 
 li.product .price-min {
-  font-size: 20px;
+  font-size: 25px;
   color: green;
   font-weight: bold;
+}
+
+li.product .priceList {
+  display: block;
+  line-height: 40px;
+}
+
+li.product .priceList span {
+  float: right;
+  margin-left: 10px;
+}
+
+li.product .product-grid-image {
+  text-decoration: none;
+  padding: 5% 10%;
+  display: block;
 }
 
 ul.product-list {

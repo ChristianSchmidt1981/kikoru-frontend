@@ -17,8 +17,7 @@ export default class ProductList extends Component {
         </div>
       );
     }
-    console.log( this.props.products);
-    this.a = 'a';
+
     return (
       <div className="col-main">
         <div id="shopify-section-collection-header" className="shopify-section">
@@ -40,8 +39,15 @@ export default class ProductList extends Component {
                 <a href={product.link} className="product-grid-image">
                   <img className="productImage" src={product.image} alt={product.description} />
                   <br />
-                  <span className="price-min">{product.price.min}</span>
-                  <span className="price-max">{product.price.max}</span>
+                  <span className="product-name">
+                    {product.description}
+                    <strong> {product.brand}</strong>
+                  </span>
+                  <br />
+                  <span className="priceList">
+                    <span className="price-max">{product.price.max} €</span>
+                    <span className="price-min">{product.price.min} €</span>
+                  </span>
                 </a>
               </li>
             ))

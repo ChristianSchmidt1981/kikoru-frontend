@@ -5,6 +5,7 @@ import Filter from '../components/Filter.jsx';
 
 const mapStateToProps = state => ({
   filter: state.filter,
+  products: state.products,
   currentFilter: state.currentFilter,
 });
 

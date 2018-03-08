@@ -34,9 +34,9 @@ export default class NavigationTop extends Component {
         <nav className="nav-bar" role="navigation">
           <ul className="site-nav">
             {
-              this.props.productGroup.map((group) => {
+              this.props.productGroup.map((group, idx) => {
                 const currentGroups = group.id === this.props.currentProductGroup ? 'link active' : 'link';
-                return (<li className="item">
+                return (<li key={idx} className="item">
                   <a
                     href={group.link}
                     className={currentGroups}

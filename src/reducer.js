@@ -8,6 +8,7 @@ const DefaultState = {
   ],
   filter: {
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    brand: [],
   },
 
 
@@ -16,6 +17,7 @@ const DefaultState = {
   currentProductGroup: 1,
   currentFilter: {
     size: [],
+    brand: [],
   },
 
   productGroup: [],

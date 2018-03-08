@@ -21682,14 +21682,16 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 var DefaultState = {
   socialLinks: [{ name: 'facebook', href: 'http://facebook.com/shopify' }, { name: 'twitter', href: 'http://twitter.com/shopify' }, { name: 'google_plus', href: 'http://plus.google.com/+shopify' }, { name: 'instagram', href: 'http://instagram.com/shopify' }, { name: 'pinterest', href: 'https://pinterest.com/shopify' }],
   filter: {
-    size: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+    size: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    brand: []
   },
 
   currentSearchString: '',
   currentSubProductGroup: 0,
   currentProductGroup: 1,
   currentFilter: {
-    size: []
+    size: [],
+    brand: []
   },
 
   productGroup: [],
@@ -23251,6 +23253,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state) {
   return {
     filter: state.filter,
+    products: state.products,
     currentFilter: state.currentFilter
   };
 };
@@ -23286,6 +23289,8 @@ __webpack_require__(97);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -23317,9 +23322,60 @@ var Filter = function (_Component) {
       this.props.changeFilter(filterGroup, filter);
     }
   }, {
-    key: 'render',
-    value: function render() {
+    key: 'getFilterBrand',
+    value: function getFilterBrand() {
       var _this2 = this;
+
+      var brandList = [].concat(_toConsumableArray(new Set(this.props.products.map(function (product) {
+        return product.brand;
+      }))));
+      return _react2.default.createElement(
+        'div',
+        { className: 'widget sidebar-links' },
+        _react2.default.createElement(
+          'div',
+          { className: 'widget-title' },
+          _react2.default.createElement(
+            'h3',
+            null,
+            'Filter-Brand'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'widget-content' },
+          _react2.default.createElement(
+            'ul',
+            { className: 'filter-brand' },
+            brandList.map(function (brandName, idx) {
+              var id = 'brand' + brandName;
+              var selected = {};
+              if (_this2.props.currentFilter.brand.includes(brandName)) {
+                selected = { checked: 'checked' };
+              }
+              return _react2.default.createElement(
+                'li',
+                { key: idx, className: 'single-filter' },
+                _react2.default.createElement('input', _extends({
+                  type: 'checkbox',
+                  id: id,
+                  value: brandName
+                }, selected, {
+                  onClick: function onClick(event) {
+                    return _this2.changeFilter(event, 'brand', brandName);
+                  }
+                })),
+                brandName
+              );
+            })
+          )
+        )
+      );
+    }
+  }, {
+    key: 'getFilterSize',
+    value: function getFilterSize() {
+      var _this3 = this;
 
       return _react2.default.createElement(
         'div',
@@ -23342,7 +23398,7 @@ var Filter = function (_Component) {
             this.props.filter.size.map(function (filterSize, idx) {
               var id = 'size' + filterSize;
               var selected = {};
-              if (_this2.props.currentFilter.size.includes(filterSize)) {
+              if (_this3.props.currentFilter.size.includes(filterSize)) {
                 selected = { checked: 'checked' };
               }
               return _react2.default.createElement(
@@ -23354,7 +23410,7 @@ var Filter = function (_Component) {
                   value: filterSize
                 }, selected, {
                   onClick: function onClick(event) {
-                    return _this2.changeFilter(event, 'size', filterSize);
+                    return _this3.changeFilter(event, 'size', filterSize);
                   }
                 })),
                 filterSize
@@ -23362,6 +23418,16 @@ var Filter = function (_Component) {
             })
           )
         )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        this.getFilterSize(),
+        this.getFilterBrand()
       );
     }
   }]);
@@ -23464,9 +23530,15 @@ var mapStateToProps = function mapStateToProps(state) {
       });
       return Object.keys(validSizes) > 0 || state.currentFilter.size.length === 0;
     })
+
+    // filter based on brand
+    .filter(function (product) {
+      return state.currentFilter.brand.includes(product.brand) || state.currentFilter.brand.length === 0;
+    })
+
     // filter based on searchstring
     .filter(function (product) {
-      return state.searchProducts === '' || product.name.toLowerCase().includes(state.currentSearchString.toLowerCase());
+      return state.searchProducts === '' || product.name.toLowerCase().includes(state.currentSearchString.toLowerCase()) || product.brand.toLowerCase().includes(state.currentSearchString.toLowerCase()) || product.description.toLowerCase().includes(state.currentSearchString.toLowerCase());
     }),
 
     productGroup: state.productGroup.filter(function (group) {
@@ -23533,8 +23605,7 @@ var ProductList = function (_Component) {
           '.'
         );
       }
-      console.log(this.props.products);
-      this.a = 'a';
+
       return _react2.default.createElement(
         'div',
         { className: 'col-main' },
@@ -23575,13 +23646,31 @@ var ProductList = function (_Component) {
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                   'span',
-                  { className: 'price-min' },
-                  product.price.min
+                  { className: 'product-name' },
+                  product.description,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    ' ',
+                    product.brand
+                  )
                 ),
+                _react2.default.createElement('br', null),
                 _react2.default.createElement(
                   'span',
-                  { className: 'price-max' },
-                  product.price.max
+                  { className: 'priceList' },
+                  _react2.default.createElement(
+                    'span',
+                    { className: 'price-max' },
+                    product.price.max,
+                    ' \u20AC'
+                  ),
+                  _react2.default.createElement(
+                    'span',
+                    { className: 'price-min' },
+                    product.price.min,
+                    ' \u20AC'
+                  )
                 )
               )
             );
@@ -23655,7 +23744,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, ".col-main {\n  float: right;\n  width: 80%;  \n}\n\n.page-header h2 {\n  margin-bottom: 19px;\n}\n\n.collection-des {\n  line-height: 20px;\n}\n\nli.product {\n  padding: 0;\n  float: left;\n  margin-right: 20px;\n  margin-bottom: 20px;\n}\n\nli.product .productImage {\n  width: 150px;\n  opacity: 0.3;\n}\n\nli.product:hover .productImage {\n  opacity: 1;\n}\n\nli.product .price-max {\n  text-decoration: line-through;\n  color: #ff0000;\n  font-weight: bold;\n  font-size: 20px;\n}\n\nli.product .price-min {\n  font-size: 20px;\n  color: green;\n  font-weight: bold;\n}\n\nul.product-list {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, ".col-main {\n  float: right;\n  width: 80%;  \n}\n\n.page-header h2 {\n  margin-bottom: 19px;\n}\n\n.collection-des {\n  line-height: 20px;\n}\n\nli.product {\n  padding: 0;\n  float: left;\n  width: 30%;\n  margin-bottom: 20px;\n  border: 1px solid #F6F6F6;\n}\n\nli.product .productImage {\n  width: 200px;\n  opacity: 0.8;\n  margin-left: 20px;\n  margin-bottom: 10px;\n}\n\nli.product .product-name {\n  font-weight: normal;\n  color: #999;\n}\n\nli.product:hover .productImage {\n  opacity: 1;\n\n}\nli.product:hover {\n  box-shadow: 0 10px 40px rgba(0,0,0,.1);\n}\n\nli.product .price-max {\n  text-decoration: line-through;\n  color: #ff0000;\n  font-weight: bold;\n  font-size: 20px;\n}\n\nli.product .price-min {\n  font-size: 25px;\n  color: green;\n  font-weight: bold;\n}\n\nli.product .priceList {\n  display: block;\n  line-height: 40px;\n}\n\nli.product .priceList span {\n  float: right;\n  margin-left: 10px;\n}\n\nli.product .product-grid-image {\n  text-decoration: none;\n  padding: 5% 10%;\n  display: block;\n}\n\nul.product-list {\n  list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -23789,11 +23878,11 @@ var NavigationTop = function (_Component) {
           _react2.default.createElement(
             'ul',
             { className: 'site-nav' },
-            this.props.productGroup.map(function (group) {
+            this.props.productGroup.map(function (group, idx) {
               var currentGroups = group.id === _this4.props.currentProductGroup ? 'link active' : 'link';
               return _react2.default.createElement(
                 'li',
-                { className: 'item' },
+                { key: idx, className: 'item' },
                 _react2.default.createElement(
                   'a',
                   {
