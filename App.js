@@ -13,11 +13,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//  app.use('/groupList', proxy({ target: 'https://hidden-hollows-73699.herokuapp.com/', changeOrigin: true }));
-//  app.use('/getPrices', proxy({ target: 'https://hidden-hollows-73699.herokuapp.com/', changeOrigin: true }));
+app.use('/groupList', proxy({ target: 'https://hidden-hollows-73699.herokuapp.com/', changeOrigin: true }));
+app.use('/getPrices', proxy({ target: 'https://hidden-hollows-73699.herokuapp.com/', changeOrigin: true }));
 
-app.use('/groupList', proxy({ target: 'http://localhost:1235/', changeOrigin: true }));
-  app.use('/getPrices', proxy({ target: 'http://localhost:1235/', changeOrigin: true }));
+// app.use('/groupList', proxy({ target: 'http://localhost:1235/', changeOrigin: true }));
+// app.use('/getPrices', proxy({ target: 'http://localhost:1235/', changeOrigin: true }));
 
 
 app.use(express.static(path.join(__dirname, 'public')));
