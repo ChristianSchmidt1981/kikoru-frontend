@@ -9,6 +9,9 @@
     "postinstall": "webpack",
     "start": "webpack && node ./bin/www"
   },
+  "engines": {
+    "node": ">=9.5"
+  },
   "dependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
