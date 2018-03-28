@@ -21692,7 +21692,8 @@ var DefaultState = {
   filter: {
     size: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     brand: [],
-    price: 0
+    price: 0,
+    partner: []
   },
 
   currentSearchString: '',
@@ -21701,7 +21702,8 @@ var DefaultState = {
   currentFilter: {
     size: [],
     brand: [],
-    price: 0
+    price: 0,
+    partner: []
   },
 
   productGroup: [],
@@ -25832,7 +25834,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "body {\n  margin: 0;\n}", ""]);
+exports.push([module.i, "body {\r\n  margin: 0;\r\n  font-family: 'Roboto', sans-serif;\r\n}", ""]);
 
 // exports
 

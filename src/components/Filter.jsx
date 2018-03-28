@@ -136,41 +136,6 @@ export default class Filter extends Component {
     );
   }
 
-  getFilterPartner() {
-    return (
-      <div className="widget sidebar-links">
-        <div className="widget-title">
-          <h3>Partner</h3>
-        </div>
-        <div className="widget-content">
-          <ul className="filter-size">
-            {
-              this.props.filter.size.map((filterSize, idx) => {
-                const id = `size${filterSize}`;
-                let selected = {};
-                if (this.props.currentFilter.size.includes(filterSize)) {
-                  selected = { defaultChecked: 'checked' };
-                } 
-                return (
-                  <li key={idx} className="single-filter">
-                    <input
-                      type="checkbox"
-                      id={id}
-                      value={filterSize}
-                      {...selected}
-                      onChange={event => this.changeFilter(event, 'size', filterSize) }
-                    />
-                    {filterSize}
-                  </li>
-                );
-              })
-            }
-          </ul>
-        </div>
-      </div>
-    );
-  }
-
   render() {
     return (
       <div>
@@ -182,9 +147,6 @@ export default class Filter extends Component {
         }
         {
           this.getFilterBrand()
-        }
-        {
-          this.getFilterPartner()
         }
       </div>
     );
