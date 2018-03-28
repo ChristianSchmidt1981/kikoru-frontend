@@ -7,6 +7,12 @@ https://github.com/ChristianSchmidt1981/kikoru-backend
 
 # Installation
 
+please download and install node.js
+url: https://nodejs.org/en/
+
+minimum version for node.js is: v9.5.0
+
+
 please install the dependencies with the following command:
 - yarn install
 
