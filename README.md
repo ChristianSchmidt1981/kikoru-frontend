@@ -5,6 +5,11 @@ backend - application. you can download the backend -
 application here:
 https://github.com/ChristianSchmidt1981/kikoru-backend
 
+# demo
+
+you found a demo here:
+https://kikoru.herokuapp.com/
+
 # Installation
 
 please download and install node.js
